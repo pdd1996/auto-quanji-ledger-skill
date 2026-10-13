@@ -23,7 +23,10 @@
 ## 快速开始
 
 ```bash
-pip install openpyxl                     # 只有微信 XLSX 需要
+# 建议在独立 venv 中安装；版本按实测组合固定（完整清单见「依赖」节）
+python -m venv .venv
+source .venv/bin/activate                # Windows: .venv\Scripts\activate
+pip install openpyxl==3.1.5              # 只有微信 XLSX 需要
 
 # 不确定加密方式时先探测（只读，不改文件）
 python scripts/check_zip_encryption.py "<文件.zip>"
@@ -106,6 +109,9 @@ scripts/selftest_unlock.py   口令恢复离线自检（造合成加密样本 �
 DSH 扫描深度为 1，必须是 `<根>/<技能名>/SKILL.md` 这个形状，且**目录名要和 `SKILL.md` 里 frontmatter 的 `name:` 完全一致**，否则不加载。
 
 ## 依赖
+
+实测环境：Python 3.12 + venv；`openpyxl==3.1.5`、`numpy==2.3.5`（可选）、
+`pypdf==6.14.2`、`pycryptodome==3.23.0`。
 
 - Python 3：`openpyxl`（读微信 XLSX；其余全部标准库）
 - `numpy`：可选，仅 unlock_bills 口令恢复提速（没有则纯 Python 回退，很慢）

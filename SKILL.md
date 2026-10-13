@@ -115,9 +115,12 @@ python scripts/build_app.py --ledger <ledger.csv> --out <记账App.html>
 ## 环境
 
 ```bash
-pip install openpyxl               # 读微信账单的 XLSX
-pip install numpy                  # 可选：unlock_bills 口令恢复提速（没有则纯 Python，很慢）
-pip install pypdf pycryptodome     # unlock_pdf.py：pypdf 必需；pycryptodome 为无 OpenSSL 时的回退
+# 建议在独立 venv 中安装，避免污染全局环境；版本按实测环境（Python 3.12）固定，便于复现
+python -m venv .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
+pip install openpyxl==3.1.5        # 读微信账单的 XLSX
+pip install numpy==2.3.5           # 可选：unlock_bills 口令恢复提速（没有则纯 Python，很慢）
+pip install pypdf==6.14.2 pycryptodome==3.23.0   # unlock_pdf.py：pypdf 必需；pycryptodome 为无 OpenSSL 时的回退
 ```
 
 zip 解密只用标准库 `zipfile`（ZipCrypto 够用），**不需要 pyzipper**。

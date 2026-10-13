@@ -26,7 +26,8 @@
 - 口令**每次导出都变**，由平台经另一通道下发（微信→公众号，支付宝→页面）
 - **默认做法**：让用户提供口令（可给多个候选，自动逐个试）
 - **默认不做**：主动恢复 / 穷举。本包**已实现**设备端口令恢复
-  （`scripts/unlock_bills.py` / `scripts/unlock_pdf.py`），但**默认关闭**：
+  （`scripts/unlock_bills.py` / `scripts/unlock_pdf.py`；`scripts/selftest_unlock.py`
+  为离线自检：仅对自造合成样本运行同一恢复管线，不接触任何账单文件），但**默认关闭**：
 
   | 约束项 | 规则 |
   |---|---|
