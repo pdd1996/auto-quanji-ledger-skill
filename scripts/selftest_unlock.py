@@ -111,7 +111,7 @@ def check_zip_case(tmp: str, name: str, deflate: bool, bit3: bool) -> bool:
         except ImportError:
             with quiet:
                 hits = unlock_bills._recover_pure_python(header, checks, 6, lo, hi)
-        found = next((h for h in hits if unlock_bills._verify_password(zf, info, h.encode())), None)
+        found = unlock_bills._verify_hits_fast(zf, info, hits, 6)
         assert found == TEST_PWD, f"{name}: 恢复结果 {found!r} != {TEST_PWD!r}"
 
         # 裁判 2：解密产物与原文逐字节一致
@@ -142,9 +142,21 @@ def check_pdf_case(tmp: str) -> bool:
 
     info = unlock_pdf._load_params(p)
     assert info and info["rev"] == 3, "样本不是 R3"
-    params = (info["o"], info["u"], info["p"], info["id0"], info["n"], info["rev"])
+    params = unlock_pdf._params(info)
     assert unlock_pdf.verify_user(TEST_PWD.encode(), params), "正确口令未通过校验"
     assert not unlock_pdf.verify_user(b"999999", params), "错误口令通过了校验"
+    # RC4 后端自检：标准向量 + （若 pycryptodome 在）与它交叉
+    assert unlock_pdf._rc4_single(b"Key", b"Plaintext") == bytes.fromhex("BBF316E8D940AF0AD3"), \
+        "RC4 标准向量不一致"
+    try:
+        from Crypto.Cipher import ARC4
+        key = bytes(range(16)); msg = bytes(16)
+        exp = msg
+        for i in range(20):
+            exp = ARC4.new(bytes(b ^ i for b in key)).encrypt(exp)
+        assert unlock_pdf._rc4_chain(key, msg) == exp, "RC4 链与 pycryptodome 交叉校验不一致"
+    except ImportError:
+        pass
     got = unlock_pdf._scan_chunk((TEST_PWD_IDX - 10, TEST_PWD_IDX + 10, params, 6))
     assert got == TEST_PWD, f"恢复结果 {got!r} != {TEST_PWD!r}"
     return True

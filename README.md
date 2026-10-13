@@ -109,7 +109,8 @@ DSH 扫描深度为 1，必须是 `<根>/<技能名>/SKILL.md` 这个形状，�
 
 - Python 3：`openpyxl`（读微信 XLSX；其余全部标准库）
 - `numpy`：可选，仅 unlock_bills 口令恢复提速（没有则纯 Python 回退，很慢）
-- `pypdf` + `pycryptodome`：仅 unlock_pdf（PDF 口令恢复）需要
+- `pypdf`：unlock_pdf（PDF 口令恢复）必需；RC4 计算优先走系统 OpenSSL（ctypes 自检），
+  `pycryptodome` 仅作为无 OpenSSL 时的回退
 - zip 解密只用标准库 `zipfile`（ZipCrypto 够用），**不需要 pyzipper**
 - 若平台改用 AES 强加密（`compress_type == 99`），标准库会失败 —— 此时明确告知用户"不支持 AES 加密的账单包"，不要假装能解
 

@@ -117,7 +117,7 @@ python scripts/build_app.py --ledger <ledger.csv> --out <记账App.html>
 ```bash
 pip install openpyxl               # 读微信账单的 XLSX
 pip install numpy                  # 可选：unlock_bills 口令恢复提速（没有则纯 Python，很慢）
-pip install pypdf pycryptodome     # 仅 unlock_pdf.py（PDF 口令恢复）需要
+pip install pypdf pycryptodome     # unlock_pdf.py：pypdf 必需；pycryptodome 为无 OpenSSL 时的回退
 ```
 
 zip 解密只用标准库 `zipfile`（ZipCrypto 够用），**不需要 pyzipper**。
