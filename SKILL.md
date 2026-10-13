@@ -1,12 +1,12 @@
 ---
-name: quanji-ledger-skill
+name: auto-quanji-ledger-skill
 agent_created: true
 description: 解析与分析中国大陆的微信支付 / 支付宝账单，可从 QQ 邮箱自动取件。当用户提到微信账单、支付宝账单、账单导入、记账、收支分析、花呗、账单洞察、QQ邮箱取账单，或提供账单压缩包 / CSV / XLSX / .eml 文件时使用。不适用于企业财务、发票报销与报税。
 metadata:
   short-description: 全迹记账：微信/支付宝账单导入与洞察
 ---
 
-# 全迹记账（quanji-ledger-skill）
+# 全迹记账（auto-quanji-ledger-skill）
 
 把微信支付 / 支付宝的官方账单，变成一本**口径正确**的账和一页洞察。
 

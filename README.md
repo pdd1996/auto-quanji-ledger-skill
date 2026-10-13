@@ -1,4 +1,4 @@
-# 全迹记账（quanji-ledger-skill）
+# 全迹记账（auto-quanji-ledger-skill）
 
 > 把微信支付 / 支付宝的官方账单，变成一本**口径正确**的账，和一页能看的洞察。
 
@@ -100,7 +100,7 @@ scripts/selftest_unlock.py   口令恢复离线自检（造合成加密样本 �
 放到用户级技能根目录即可（所有会话可用；只给单个项目用则放 `<项目>/.dsh/skills/`）：
 
 ```
-~/.dsh/skills/quanji-ledger-skill/
+~/.dsh/skills/auto-quanji-ledger-skill/
 ```
 
 DSH 扫描深度为 1，必须是 `<根>/<技能名>/SKILL.md` 这个形状，且**目录名要和 `SKILL.md` 里 frontmatter 的 `name:` 完全一致**，否则不加载。
